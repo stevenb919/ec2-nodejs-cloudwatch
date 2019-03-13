@@ -1,5 +1,7 @@
 # Node.js EC2 CloudWatch Logging Project
 
+## Set Up
+
 1. Create policy to allow EC2 to write logs to CloudWatch
     * IAM
     * Create Role
@@ -31,3 +33,23 @@
     * In Alarm details enter Name and Description
     * For Whenever field, select is >= 1
     * In Actions, select the correct group to send the notification to.
+
+## Assign Public (Elastic) IP to EC2
+
+1. EC2 > Elastic IPs > Click Allocate New Address > Leave Amazon Pool selected and click Allocate
+2. Ensure EC2 instance is up and running, EC2 > Elastic IPs > Select IP > Actions > Associate Address
+
+## Configure Autorecovery If Instance Fails
+
+Configure a CloudWatch alarm action to automatically recover your instance
+
+1. In the Amazon EC2 console, choose Instances in the navigation pane, and then select the instance
+2. Choose Actions, CloudWatch Monitoring, Add/Edit Alarms, and then choose Create Alarm
+3. Choose Create topic
+4. For Send a notification to field, type a topic name
+5. For With these recipients field, type the email address
+6. Choose Take the action, and then choose Recover
+7. Choose your constraints, and then choose Create Alarm
+
+Note, you can also manually destroy your instance from the EC2 console and create a new one using
+the user-data script, then reassociate the Elastic IP.
